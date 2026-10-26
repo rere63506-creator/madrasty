@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<style>
+body{font-family:'Cairo'; background:#fff7e6; display:flex; justify-content:center; align-items:center; min-height:100vh}
+.card{background:white; padding:25px; border-radius:18px; box-shadow:0 8px 25px #ffd8a8; width:350px}
+input{width:100%; padding:11px; margin:7px 0; border:1.5px solid #ffb86a; border-radius:9px}
+.check{width:auto; margin-left:8px}
+button{width:100%; background:#ff7f50; color:white; padding:12px; border:none; border-radius:10px; font-weight:bold; margin-top:10px; cursor:pointer}
+label{font-weight:bold; color:#555}
+</style>
+</head>
+<body>
+<div class="card">
+<h2 style="color:#e76f51; text-align:center">تعديل بيانات الطالب 📝</h2>
+<form method="POST">
+{% csrf_token %}
+<label>اسم الطالب</label>
+<input type="text" name="name" value="{{ student.name }}" required>
+
+<label>الصف</label>
+<input type="text" name="grade" value="{{ student.grade }}">
+
+<label>رقم ولي الامر</label>
+<input type="text" name="phone" value="{{ student.phone }}">
+
+<p>
+<input class="check" type="checkbox" name="attend" {% if student.attend %}checked{% endif %}> حاضر
+</p>
+<p>
+<input class="check" type="checkbox" name="homework" {% if student.homework %}checked{% endif %}> عامل الواجب
+</p>
+<p>
+<input class="check" type="checkbox" name="paid" {% if student.paid %}checked{% endif %}> دافع المصاريف
+</p>
+
+<button type="submit">حفظ التعديل</button>
+</form>
+<a href="{% url 'dashboard' %}" style="display:block; text-align:center; margin-top:12px; color:#e76f51">رجوع للوحة التحكم</a>
+</div>
+</body>
+</html>

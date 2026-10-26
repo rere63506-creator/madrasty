@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head><meta charset="UTF-8">
+<style>body{font-family:'Cairo'; background:#f0f0ff; display:flex; justify-content:center; align-items:center; height:100vh} .card{background:white; padding:30px; border-radius:20px; box-shadow:0 10px 30px #b8b5ff; width:320px} input{width:100%; padding:12px; margin:8px 0; border:1.5px solid #a0a0ff; border-radius:10px} button{width:100%; background:#5a189a; color:white; padding:12px; border:none; border-radius:10px; font-weight:bold}</style>
+</head>
+<body>
+<div class="card">
+<h2 style="color:#5a189a; text-align:center">تسجيل دخول المدرس</h2>
+{% if error %}<p style="color:red; text-align:center">{{ error }}</p>{% endif %}
+<form method="POST">
+{% csrf_token %}
+<input type="text" name="name" placeholder="اسم المدرس" required>
+<input type="password" name="password" placeholder="كلمة السر" required>
+<button type="submit">دخول</button>
+</form>
+</div>
+</body>
+</html>

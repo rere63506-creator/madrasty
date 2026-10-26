@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head><meta charset="UTF-8">
+<style>body{font-family:'Cairo'; background:#fffaf0; padding:20px} .box{background:white; padding:20px; border-radius:15px; box-shadow:0 5px 15px #ffe5b4; margin-bottom:20px} input{padding:10px; margin:5px; border:1.5px solid #ffb86a; border-radius:8px} button{background:#ff7f50; color:white; border:none; padding:10px 20px; border-radius:8px; font-weight:bold}</style>
+</head>
+<body>
+<div class="box">
+<h2 style="color:#e76f51">إضافة طالب جديد 📚</h2>
+<form method="POST">
+{% csrf_token %}
+<input type="text" name="name" placeholder="اسم الطالب" required>
+<input type="text" name="grade" placeholder="الصف / المرحلة" required>
+<input type="text" name="phone" placeholder="رقم ولي الأمر" required>
+<button type="submit">إضافة الطالب</button>
+</form>
+</div>
+
+<div class="box">
+<h3>قائمة الطلاب</h3>
+{% for s in students %}
+<p>👩‍🎓 {{ s.name }} - {{ s.grade }} - {{ s.phone }} 
+<a href="{% url 'edit_student' s.id %}">تعديل</a> | 
+<a href="{% url 'delete_student' s.id %}">حذف</a>
+</p>
+{% empty %}
+<p>لسه مفيش طلاب، ضيفي أول طالب فوق</p>
+{% endfor %}
+</div>
+</body>
+</html>

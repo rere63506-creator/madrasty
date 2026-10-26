@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>دخول ولي الأمر</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap');
+body{
+  font-family:'Cairo', sans-serif; 
+  background:#fff7e6; 
+  display:flex; 
+  justify-content:center; 
+  align-items:center; 
+  height:100vh;
+  margin:0;
+}
+.card{
+  background:white; 
+  padding:35px 30px; 
+  border-radius:22px; 
+  box-shadow:0 10px 30px #ffd8a8; 
+  width:360px;
+  text-align:center;
+}
+h2{color:#e76f51; margin-bottom:5px}
+p.sub{color:#888; font-size:14px; margin-bottom:20px}
+input{
+  width:100%; 
+  padding:14px; 
+  margin:10px 0; 
+  border:2px solid #ffdab9; 
+  border-radius:12px; 
+  font-size:16px;
+  font-family:'Cairo';
+  box-sizing:border-box;
+  outline:none;
+}
+input:focus{border-color:#ff7f50}
+button{
+  width:100%; 
+  background:#ff7f50; 
+  color:white; 
+  padding:14px; 
+  border:none; 
+  border-radius:12px; 
+  font-size:18px; 
+  font-weight:bold;
+  font-family:'Cairo';
+  cursor:pointer;
+  margin-top:10px;
+  box-shadow:0 5px 15px #ffab91;
+}
+button:hover{background:#e76f51}
+.error{
+  background:#ffebee;
+  color:#c62828;
+  padding:10px;
+  border-radius:10px;
+  font-size:14px;
+  margin-bottom:10px;
+}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>أهلاً بيك 👋</h2>
+<p class="sub">تابع مستوى ابنك دلوقتي</p>
+
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+
+<form method="POST">
+ {% csrf_token %}
+ <input type="text" name="name" placeholder="اسم الطالب - " required>
+ <input type="text" name="grade" placeholder="الصف -  " required>
+ <button type="submit">دخول ✨</button>
+</form>
+
+</div>
+</body>
+</html>

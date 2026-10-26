@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>متابعة الطالب</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap');
+body{font-family:'Cairo'; background:#fff7e6; display:flex; justify-content:center; padding:20px; margin:0}
+.card{background:white; padding:25px; border-radius:22px; box-shadow:0 10px 30px #ffd8a8; width:380px}
+h2{color:#e76f51; text-align:center; margin:0}
+.sub{color:#888; text-align:center; font-size:13px; margin-bottom:15px}
+p{font-size:16px; margin:8px 0; padding-bottom:8px; border-bottom:1px solid #fff0d6}
+h3{color:#e76f51; margin-top:25px; font-size:18px; border-top:2px dashed #ffdab9; padding-top:15px}
+.ok{color:green; font-weight:bold}
+.no{color:red; font-weight:bold}
+a.logout{display:block; text-align:center; margin-top:20px; background:#ff7f50; color:white; padding:12px; border-radius:12px; text-decoration:none; font-weight:bold}
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>{{ student.name }} ✨</h2>
+  <p class="sub">تاريخ التسجيل: {{ student.date|default:"2025-10-26" }}</p>
+
+  <p>الصف: {{ student.grade }}</p>
+  <p>رقم ولي الأمر: {{ student.phone }}</p>
+  <p>الحضور النهاردة: {% if student.attend %}<span class="ok">حاضر ✅</span>{% else %}<span class="no">غائب ❌</span>{% endif %}</p>
+  <p>الواجب: {% if student.homework %}<span class="ok">عامل ✅</span>{% else %}<span class="no">مش عامل ❌</span>{% endif %}</p>
+  <p>المصاريف: {% if student.paid %}<span class="ok">مدفوعة ✅</span>{% else %}<span class="no">غير مدفوعة ❌</span>{% endif %}</p>
+
+<h3>سجل الحضور</h3>
+{% for a in attendances %}
+  <p>{{ a.date }} - {% if a.present %} حضر ✅ {% else %} محضرش ❌ {% endif %}</p>
+{% endfor %}
+
+  <h3>📚 سجل الواجبات</h3>
+  {% for h in homeworks %}
+    <p>{{ h.date }} - {% if h.done %}<span class="ok">عامل</span>{% else %}<span class="no">مش عامل</span>{% endif %} {% if h.note %} - {{ h.note }}{% endif %}</p>
+  {% empty %}
+    <p>لسه مفيش واجبات متسجلة</p>
+  {% endfor %}
+
+  <h3>💰 سجل المصاريف</h3>
+  {% for p in payments %}
+    <p>{{ p.date }} - شهر {{ p.month }} - {% if p.paid %}<span class="ok">مدفوع</span>{% else %}<span class="no">مش مدفوع</span>{% endif %}</p>
+  {% empty %}
+    <p>لسه مفيش مصاريف متسجلة</p>
+  {% endfor %}
+
+  <a class="logout" href="{% url 'student_login' %}">تسجيل خروج</a>
+</div>
+</body>
+</html>
+</html>

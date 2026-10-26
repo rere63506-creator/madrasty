@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<style>
+body{font-family:'Cairo', sans-serif; background:#fef6ff; display:flex; justify-content:center; align-items:center; height:100vh}
+.card{background:white; padding:30px; border-radius:20px; box-shadow:0 10px 30px #e9c5ff; width:320px}
+input{width:100%; padding:12px; margin:8px 0; border:1.5px solid #e0aaff; border-radius:10px}
+button{width:100%; background:#c77dff; color:white; padding:12px; border:none; border-radius:10px; font-weight:bold; cursor:pointer}
+</style>
+</head>
+<body>
+<div class="card">
+<h2 style="color:#7b2cbf; text-align:center">تسجيل مدرس جديد✨</h2>
+<form method="POST">
+{% csrf_token %}
+<input type="text" name="name" placeholder="اسم المدرس" required>
+<input type="text" name="phone" placeholder="رقم التليفون" required>
+<input type="password" name="password" placeholder="كلمة السر" required>
+<button type="submit">سجل الآن</button>
+</form>
+</div>
+</body>
+</html>
